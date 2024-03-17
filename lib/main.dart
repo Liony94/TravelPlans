@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_voyage/home.dart';
+import 'package:mobile_voyage/views/city/city.dart';
 
 void main() {
   runApp(DymaTrip());
@@ -8,9 +8,10 @@ void main() {
 class DymaTrip extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Home()
+      // home: Home()
+      home: City()
     );
   }
 }
