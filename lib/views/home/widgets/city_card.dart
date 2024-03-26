@@ -1,64 +1,50 @@
 import 'package:flutter/material.dart';
+import '../../../models/city_model.dart';
+import '../../city/city_view.dart';
 
 class CityCard extends StatelessWidget {
-  final String name;
-  final String image;
-  final bool checked;
-  final VoidCallback updateChecked;
+  final City city;
 
-  const CityCard(
-      {required this.name,
-      required this.image,
-      required this.checked,
-      required this.updateChecked});
+  const CityCard({super.key, required this.city});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: 8,
-      child: Container(
-        height: 150,
-        child: Stack(
-          fit: StackFit.expand,
-          children: <Widget>[
-            Ink.image(
-              fit: BoxFit.cover,
-              image: AssetImage(image),
-              child: InkWell(
-                onTap: updateChecked,
+      elevation: 5,
+      child: SizedBox(
+          height: 150,
+          child: Stack(
+            fit: StackFit.expand,
+            children: <Widget>[
+              Ink.image(
+                image: AssetImage(city.image),
+                fit: BoxFit.cover,
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/city', arguments: city);
+                  },
+                ),
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: Column(
-                children: <Widget>[
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Icon(
-                          checked ? Icons.star : Icons.star_border,
-                          color: Colors.white,
-                          size: 40,
-                        ),
-                      ],
+              Positioned(
+                top: 10,
+                left: 10,
+                child: Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 10,
+                    vertical: 5,
+                  ),
+                  color: Colors.black54,
+                  child: Text(
+                    city.name,
+                    style: const TextStyle(
+                      fontSize: 35,
+                      color: Colors.white,
                     ),
                   ),
-                  Row(
-                    children: <Widget>[
-                      Text(
-                        name,
-                        style: TextStyle(color: Colors.white, fontSize: 30),
-                      ),
-                    ],
-                  ),
-                ],
+                ),
               ),
-            ),
-          ],
-        ),
-      ),
+            ],
+          )),
     );
   }
 }
